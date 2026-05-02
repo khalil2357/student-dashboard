@@ -13,7 +13,7 @@
   margin-bottom: 24px;
   border: 1px solid var(--border);
   border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.62);
+  background: var(--surface-soft);
   backdrop-filter: blur(18px);
   box-shadow: var(--shadow-soft);
 }
@@ -57,6 +57,15 @@
   font-weight: 700;
 }
 
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: var(--surface-strong);
+  color: var(--text-strong);
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-weight: 700;
+}
+
 .search-bar,
 .sort-controls {
   display: grid;
@@ -80,7 +89,7 @@
   border: 1px solid var(--border);
   border-radius: 18px;
   padding: 16px 18px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--input-bg);
   color: var(--text-strong);
 }
 
@@ -110,7 +119,7 @@
 .favorite-button {
   border: 1px solid var(--border);
   border-radius: 999px;
-  background: rgba(255, 255, 255, 0.72);
+  background: var(--surface-strong);
   color: var(--text-strong);
   font-weight: 700;
   transition:
@@ -153,7 +162,7 @@
   padding: 48px 24px;
   border: 1px dashed var(--border);
   border-radius: var(--radius-xl);
-  background: rgba(255, 255, 255, 0.5);
+  background: var(--surface-soft);
 }
 
 .spinner {
@@ -357,6 +366,114 @@
   border: 1px solid var(--border-soft);
 }
 
+.registration-panel {
+  padding: 2px 0 0;
+}
+
+.registration-panel__heading {
+  margin-bottom: 16px;
+}
+
+.registration-form {
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border);
+  background: var(--surface-soft);
+  box-shadow: var(--shadow-soft);
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.field-group {
+  display: grid;
+  gap: 8px;
+}
+
+.field-group--full {
+  grid-column: 1 / -1;
+}
+
+.field-label {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent-strong);
+  font-weight: 700;
+}
+
+.field-group input,
+.field-group textarea {
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 14px 16px;
+  background: var(--input-bg);
+  color: var(--text-strong);
+}
+
+.field-group textarea {
+  resize: vertical;
+  min-height: 98px;
+}
+
+.field-help,
+.field-error {
+  font-size: 0.88rem;
+}
+
+.field-help {
+  color: var(--muted);
+}
+
+.field-error {
+  color: var(--danger-text);
+}
+
+.form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.form-submit,
+.remove-button {
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 12px 16px;
+  font-weight: 700;
+}
+
+.form-submit {
+  background: var(--accent);
+  color: #fff;
+}
+
+.remove-button {
+  margin-top: 12px;
+  background: var(--danger-bg);
+  color: var(--danger-text);
+  border-color: transparent;
+}
+
+.form-notification {
+  margin: 0;
+  color: var(--muted);
+}
+
+.form-notification--success {
+  padding: 10px 14px;
+  border-radius: 999px;
+  background: var(--success-bg);
+  color: var(--success-text);
+}
+
 .stat-badge__label {
   font-size: var(--text-xs);
   text-transform: uppercase;
@@ -413,5 +530,9 @@
   .student-card__avatar {
     width: 84px;
     height: 84px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
   }
 }

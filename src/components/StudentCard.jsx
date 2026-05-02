@@ -1,8 +1,7 @@
 import PropTypes from 'prop-types'
-import { useEffect, useState } from 'react'
+import { useStudentContext } from '../contexts/StudentContext.jsx'
 import { CourseTag } from './CourseTag.jsx'
 import { StatBadge } from './StatBadge.jsx'
-
 
 function StudentCard({
 	name,
@@ -12,19 +11,12 @@ function StudentCard({
 	major,
 	credits,
 	courses,
-	isFavorite,
-	onFavoriteToggle,
 }) {
-	const [favorite, setFavorite] = useState(isFavorite)
-
-	useEffect(() => {
-		setFavorite(isFavorite)
-	}, [isFavorite])
+	const { favoriteIds, toggleFavorite, removeStudent } = useStudentContext()
+	const favorite = favoriteIds.includes(id)
 
 	const handleFavoriteClick = () => {
-		const nextFavoriteState = !favorite
-		setFavorite(nextFavoriteState)
-		onFavoriteToggle(id, nextFavoriteState)
+		toggleFavorite(id)
 	}
 
 	return (
@@ -47,6 +39,10 @@ function StudentCard({
 			>
 				<span aria-hidden="true">{favorite ? '♥' : '♡'}</span>
 				{favorite ? 'Favorited' : 'Add favorite'}
+			</button>
+
+			<button type="button" className="remove-button" onClick={() => removeStudent(id)}>
+				Remove Student
 			</button>
 
 			<div className="student-card__details">
@@ -78,8 +74,6 @@ StudentCard.propTypes = {
 			color: PropTypes.string.isRequired,
 		}),
 	).isRequired,
-	isFavorite: PropTypes.bool.isRequired,
-	onFavoriteToggle: PropTypes.func.isRequired,
 }
 
 export { StudentCard }
