@@ -1,8 +1,32 @@
 import PropTypes from 'prop-types'
+import { useEffect, useState } from 'react'
 import { CourseTag } from './CourseTag.jsx'
 import { StatBadge } from './StatBadge.jsx'
 
-function StudentCard({ name, id, avatar, gpa, major, credits, courses }) {
+
+function StudentCard({
+	name,
+	id,
+	avatar,
+	gpa,
+	major,
+	credits,
+	courses,
+	isFavorite,
+	onFavoriteToggle,
+}) {
+	const [favorite, setFavorite] = useState(isFavorite)
+
+	useEffect(() => {
+		setFavorite(isFavorite)
+	}, [isFavorite])
+
+	const handleFavoriteClick = () => {
+		const nextFavoriteState = !favorite
+		setFavorite(nextFavoriteState)
+		onFavoriteToggle(id, nextFavoriteState)
+	}
+
 	return (
 		<article className="student-card">
 			<div className="student-card__top">
@@ -14,6 +38,16 @@ function StudentCard({ name, id, avatar, gpa, major, credits, courses }) {
 					</p>
 				</div>
 			</div>
+
+			<button
+				type="button"
+				className={`favorite-button${favorite ? ' favorite-button--active' : ''}`}
+				onClick={handleFavoriteClick}
+				aria-pressed={favorite}
+			>
+				<span aria-hidden="true">{favorite ? '♥' : '♡'}</span>
+				{favorite ? 'Favorited' : 'Add favorite'}
+			</button>
 
 			<div className="student-card__details">
 				<div className="student-card__badges">
@@ -44,6 +78,8 @@ StudentCard.propTypes = {
 			color: PropTypes.string.isRequired,
 		}),
 	).isRequired,
+	isFavorite: PropTypes.bool.isRequired,
+	onFavoriteToggle: PropTypes.func.isRequired,
 }
 
 export { StudentCard }
