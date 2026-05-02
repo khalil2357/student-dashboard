@@ -1,8 +1,24 @@
 import PropTypes from 'prop-types'
+import { useStudentContext } from '../contexts/StudentContext.jsx'
 import { CourseTag } from './CourseTag.jsx'
 import { StatBadge } from './StatBadge.jsx'
 
-function StudentCard({ name, id, avatar, gpa, major, credits, courses }) {
+function StudentCard({
+	name,
+	id,
+	avatar,
+	gpa,
+	major,
+	credits,
+	courses,
+}) {
+	const { favoriteIds, toggleFavorite, removeStudent } = useStudentContext()
+	const favorite = favoriteIds.includes(id)
+
+	const handleFavoriteClick = () => {
+		toggleFavorite(id)
+	}
+
 	return (
 		<article className="student-card">
 			<div className="student-card__top">
@@ -14,6 +30,20 @@ function StudentCard({ name, id, avatar, gpa, major, credits, courses }) {
 					</p>
 				</div>
 			</div>
+
+			<button
+				type="button"
+				className={`favorite-button${favorite ? ' favorite-button--active' : ''}`}
+				onClick={handleFavoriteClick}
+				aria-pressed={favorite}
+			>
+				<span aria-hidden="true">{favorite ? '♥' : '♡'}</span>
+				{favorite ? 'Favorited' : 'Add favorite'}
+			</button>
+
+			<button type="button" className="remove-button" onClick={() => removeStudent(id)}>
+				Remove Student
+			</button>
 
 			<div className="student-card__details">
 				<div className="student-card__badges">
